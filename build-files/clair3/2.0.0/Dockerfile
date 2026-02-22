@@ -40,8 +40,7 @@ ENV PATH="$PATH:/opt/conda/bin/"
 
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
-RUN pypy3 -m ensurepip && \
-    pypy3 -m pip install mpmath==1.2.1 &&\
+RUN pypy3 -m pip install --break-system-packages mpmath==1.2.1 &&\
     pip install tensorflow-addons
 
 RUN wget -q https://github.com/HKU-BAL/Clair3/archive/refs/tags/v${CLAIR3_VER}.tar.gz &&\
@@ -105,9 +104,8 @@ RUN apt-get update && apt-get install -y pypy3 pypy3-dev python3-pip && \
 ENV PATH="/opt/conda/bin/:/clair3:${PATH}" \
     LC_ALL=C.UTF-8
 
-RUN pypy3 -m ensurepip &&\
-    pypy3 -m pip install --no-cache-dir mpmath==1.2.1 &&\
-    pip install --no-cache-dir tensorflow-addons
+RUN pypy3 -m pip install --break-system-packages mpmath==1.2.1 &&\
+    pip install tensorflow-addons
 
 COPY --from=builder /clair3 /clair3
 
