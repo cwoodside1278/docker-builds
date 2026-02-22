@@ -33,9 +33,8 @@ RUN micromamba install --name base -c conda-forge -c bioconda \
     micromamba clean -a -f -y
 
 # Added to mitigate the PyPy download issue
-RUN apt-get update && apt-get install -y pypy3 pypy3-dev && \
-    pypy3 -m ensurepip && \
-    pypy3 -m pip install mpmath==1.2.1
+RUN apt-get update && apt-get install -y pypy3 pypy3-dev python3-pip && \
+    pypy3 -m pip install --break-system-packages mpmath==1.2.1
 
 ENV PATH="$PATH:/opt/conda/bin/"
 
@@ -100,9 +99,8 @@ RUN micromamba install --name base -c conda-forge -c bioconda \
     rm -rf /opt/conda/pkgs/
 
 # Added to mitigate the PyPy download issue
-RUN apt-get update && apt-get install -y pypy3 pypy3-dev && \
-    pypy3 -m ensurepip && \
-    pypy3 -m pip install mpmath==1.2.1
+RUN apt-get update && apt-get install -y pypy3 pypy3-dev python3-pip && \
+    pypy3 -m pip install --break-system-packages mpmath==1.2.1
 
 ENV PATH="/opt/conda/bin/:/clair3:${PATH}" \
     LC_ALL=C.UTF-8
