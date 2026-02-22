@@ -84,8 +84,9 @@ LABEL license="https://github.com/HKU-BAL/Clair3/blob/main/LICENSE.md"
 LABEL maintainer="Kutluhan Incekara"
 LABEL maintainer.email="kutluhan.incekara@ct.gov"
 
-RUN apt-get update && apt-get install --no-install-recommends -y\
-    procps && \
+RUN apt-get update && apt-get install --no-install-recommends -y \
+    procps \
+    wget && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 RUN micromamba install --name base -c conda-forge -c bioconda \
