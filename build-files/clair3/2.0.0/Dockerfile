@@ -17,8 +17,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN micromamba install --name base -c conda-forge -c bioconda \
     python=3.10.0 \
-    pypy3.9 \
-    tensorflow-cpu=2.8.0 \
+    tensorflow-cpu=2.11.0 \
     pytables \
     pigz \
     cffi \
@@ -32,6 +31,11 @@ RUN micromamba install --name base -c conda-forge -c bioconda \
     automake \
     curl &&\
     micromamba clean -a -f -y
+
+# Added to mitigate the PyPy download issue
+RUN apt-get update && apt-get install -y pypy3 pypy3-dev && \
+    pypy3 -m ensurepip && \
+    pypy3 -m pip install mpmath==1.2.1
 
 ENV PATH="$PATH:/opt/conda/bin/"
 
@@ -84,8 +88,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y\
 RUN micromamba install --name base -c conda-forge -c bioconda \
     python=3.10.0 \
     numpy=1.24.3 \
-    pypy3.9 \
-    tensorflow-cpu=2.8.0 \
+    tensorflow-cpu=2.11.0 \
     pytables \
     pigz \
     cffi \
@@ -95,6 +98,11 @@ RUN micromamba install --name base -c conda-forge -c bioconda \
     whatshap=1.7 &&\
     micromamba clean -a -f -y &&\
     rm -rf /opt/conda/pkgs/
+
+# Added to mitigate the PyPy download issue
+RUN apt-get update && apt-get install -y pypy3 pypy3-dev && \
+    pypy3 -m ensurepip && \
+    pypy3 -m pip install mpmath==1.2.1
 
 ENV PATH="/opt/conda/bin/:/clair3:${PATH}" \
     LC_ALL=C.UTF-8
