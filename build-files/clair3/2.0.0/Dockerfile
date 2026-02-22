@@ -17,14 +17,14 @@ RUN apt-get update && apt-get install -y \
 
 RUN micromamba install --name base -c conda-forge -c bioconda \
     python=3.10.0 \
-    pypy3.6 \
+    pypy3.10 \
     tensorflow-cpu=2.8.0 \
     pytables \
     pigz \
     cffi=1.14.4 \
     parallel=20191122 \
     zstd \
-    samtools=1.23.0 \
+    samtools=1.15.1 \
     whatshap=1.7 \
     xz \
     zlib \
@@ -84,14 +84,14 @@ RUN apt-get update && apt-get install --no-install-recommends -y\
 RUN micromamba install --name base -c conda-forge -c bioconda \
     python=3.10.0 \
     numpy=1.24.3 \
-    pypy3.6 \
+    pypy3.10 \
     tensorflow-cpu=2.8.0 \
     pytables \
     pigz \
     cffi=1.14.4 \
     parallel=20191122 \
     zstd \
-    samtools=1.23.0 \
+    samtools=1.15.1 \
     whatshap=1.7 &&\
     micromamba clean -a -f -y &&\
     rm -rf /opt/conda/pkgs/
