@@ -50,7 +50,7 @@ RUN wget -q https://github.com/HKU-BAL/Clair3/archive/refs/tags/v${CLAIR3_VER}.t
     make &&\
     mkdir /clair3 &&\
     cp -rv clair3 preprocess postprocess scripts shared /clair3 &&\
-    cp clair3.py run_clair3.sh /clair3 &&\
+    cp clair3.py run_clair3.py run_clair3.sh /clair3 &&\
     cp longphase libclair3* /clair3 &&\
     cp LICENSE.md /clair3
 
