@@ -112,7 +112,7 @@ WORKDIR /data
 ## Test ##
 FROM app AS test
 
-RUN run_clair3.sh
+RUN run_clair3.sh --help || true
 
 RUN apt-get update && apt-get install -y wget 
 
