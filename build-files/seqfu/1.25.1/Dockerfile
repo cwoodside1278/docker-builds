@@ -14,7 +14,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     zlib1g-dev \
     curl \
     python3 \
-    python3-pip \
+    python3-pip 
+    python-is-python3 \
     git \
     ca-certificates && \
     rm -rf /var/lib/apt/lists/*
@@ -57,6 +58,7 @@ COPY --from=builder /root/seqfu2-${SEQFU_VER}/bin /usr/local/bin
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     ca-certificates \
+    python-is-python3 \
     wget \
     libpcre3 && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
