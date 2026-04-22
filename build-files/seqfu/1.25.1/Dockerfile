@@ -70,15 +70,20 @@ FROM app AS test
 
 ARG SEQFU_VER
 
+# Install python for seqfu tests
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3 \
+    python-is-python3 && \
+    rm -rf /var/lib/apt/lists/*
+    
 # Verify installation
 RUN seqfu --version && seqfu --help
-
 WORKDIR /test
 
 # using dev supplied tests
 COPY --from=builder /root/seqfu2-${SEQFU_VER} /test
-
 # skipping test-check.sh because it throws an error on dev-supplied fastq files
+
 RUN mv test/test-check.sh test/test-check.sh_skip && \
     bash test/mini.sh
 
