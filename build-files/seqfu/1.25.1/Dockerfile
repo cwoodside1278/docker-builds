@@ -13,13 +13,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     zlib1g-dev \
     curl \
-    python3 \
-    python3-pip \
-    python-is-python3 \
     git \
     ca-certificates && \
     rm -rf /var/lib/apt/lists/*
-
+    
 # Set the working directory
 WORKDIR /root
 
@@ -35,7 +32,7 @@ RUN wget -q https://github.com/telatin/seqfu2/archive/refs/tags/v${SEQFU_VER}.ta
     cd seqfu2-${SEQFU_VER} && \
     make
 
-# Stage 2: Create the final image
+# Stage 2: Create the final image - App stage
 FROM ubuntu:noble AS app
 ARG SEQFU_VER
 
@@ -58,10 +55,14 @@ COPY --from=builder /root/seqfu2-${SEQFU_VER}/bin /usr/local/bin
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     ca-certificates \
+    python3 \
     python-is-python3 \
     wget \
-    libpcre3 && \
-    apt-get autoclean && rm -rf /var/lib/apt/lists/*
+    zlib1g \
+    libpcre3 \
+    jq \
+    coreutils && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ENV LC_ALL=C
 
