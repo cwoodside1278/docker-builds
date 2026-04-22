@@ -80,8 +80,11 @@ WORKDIR /test
 # using dev supplied tests
 COPY --from=builder /root/seqfu2-${SEQFU_VER} /test
 
-# Add non-root user before running tests
+## Add non-root user before running tests
+# RUN useradd -m -s /bin/bash appuser
+# USER appuser
 RUN useradd -m -s /bin/bash appuser
+RUN chown -R appuser:appuser /test
 USER appuser
 
 # Run all dev-supplied tests
