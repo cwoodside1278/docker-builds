@@ -5,6 +5,7 @@ FROM ubuntu:noble AS app
 LABEL base.image="ubuntu:noble"
 LABEL version="2585414"
 LABEL software="cdc-spn"
+LABEL dockerfile.version="1"
 LABEL software.version="0.1"
 LABEL description="Scripts and reference files to type streptococcus pneumoniae"
 LABEL website="https://github.com/BenJamesMetcalf/Spn_Scripts_Reference"
