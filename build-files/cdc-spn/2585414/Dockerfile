@@ -77,12 +77,13 @@ ENV PATH="/Spn_Scripts_Reference:/usr/local/bin:${PATH}"
 RUN apt-get update && apt-get install -y sra-toolkit \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# run test
-# Streptococcus pneumoniae reference that is Serotype 1
+# run test - ERR559060 is Streptococcus pneumoniae Serotype 1
 RUN fasterq-dump ERR559060 --split-files -O /test_data \
   && perl /Spn_Scripts_Reference/SPN_Serotyper.pl \
      -1 /test_data/ERR559060_1.fastq \
      -2 /test_data/ERR559060_2.fastq \
-     --output /test_output \
+     -r /Spn_Scripts_Reference \
+     -o /test_output \
+     -n ERR559060 \
   && echo "SPN_Serotyper.pl test passed" \
   && rm -rf /test_data /test_output
