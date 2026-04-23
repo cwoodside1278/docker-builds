@@ -58,6 +58,7 @@ RUN git clone --recursive https://github.com/freebayes/freebayes.git \
   && cd freebayes \
   && git checkout v1.3.6 \
   && git submodule update --init --recursive \
+  && sed -i '1s/^/#include <limits>\n/' intervaltree/IntervalTree.h \
   && meson setup build/ --buildtype release \
   && cd build \
   && ninja \
