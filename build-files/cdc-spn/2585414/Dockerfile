@@ -13,6 +13,8 @@ LABEL license="https://github.com/BenJamesMetcalf/Spn_Scripts_Reference"
 LABEL maintainer="Kelsey Florek"
 LABEL maintainer.email="kelsey.florek@slh.wisc.edu"
 
+WORKDIR /data
+
 # install dependencies
 RUN apt-get update && apt-get install -y \
   perl \
@@ -74,6 +76,8 @@ ENV PATH="/Spn_Scripts_Reference:/usr/local/bin:${PATH}"
 
 # ---- test stage ----
 FROM app AS test
+
+WORKDIR /test_data
 
 # install sra-toolkit for test data download
 RUN apt-get update && apt-get install -y sra-toolkit \
