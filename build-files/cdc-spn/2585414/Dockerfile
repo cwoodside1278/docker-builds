@@ -1,5 +1,5 @@
-#Use ubuntu as base image
-FROM ubuntu:noble
+# Use ubuntu as base image
+FROM ubuntu:noble AS app
 
 # metadata
 LABEL base.image="ubuntu:noble"
@@ -10,7 +10,7 @@ LABEL description="Scripts and reference files to type streptococcus pneumoniae"
 LABEL website="https://github.com/BenJamesMetcalf/Spn_Scripts_Reference"
 LABEL license="https://github.com/BenJamesMetcalf/Spn_Scripts_Reference"
 LABEL maintainer="Kelsey Florek"
-LABEL maintainer="kelsey.florek@slh.wisc.edu"
+LABEL maintainer.email="kelsey.florek@slh.wisc.edu"
 
 # install dependencies
 RUN apt-get update && apt-get install -y \
@@ -53,7 +53,7 @@ RUN wget https://github.com/katholt/srst2/archive/v0.2.0.tar.gz \
   && rm v0.2.0.tar.gz \
   && pip install --break-system-packages /srst2-0.2.0
 
-# install freebayes v1.3.6, because v1.3.10 uses libwfa2, which ubuntu noble doesn't have yet
+# install freebayes v1.3.6
 RUN git clone --recursive https://github.com/freebayes/freebayes.git \
   && cd freebayes \
   && git checkout v1.3.6 \
@@ -63,7 +63,7 @@ RUN git clone --recursive https://github.com/freebayes/freebayes.git \
   && cd build \
   && ninja \
   && ninja install
-  
+
 # add the spn scripts pinned to commit 2585414
 RUN git clone https://github.com/BenJamesMetcalf/Spn_Scripts_Reference.git \
   && cd Spn_Scripts_Reference \
@@ -71,9 +71,10 @@ RUN git clone https://github.com/BenJamesMetcalf/Spn_Scripts_Reference.git \
 
 ENV PATH="/Spn_Scripts_Reference:/usr/local/bin:${PATH}"
 
+# ---- test stage ----
+FROM app AS test
 
-## Test Section
-# install SRA toolkit for test data download
+# install sra-toolkit for test data download
 RUN apt-get update && apt-get install -y sra-toolkit \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
