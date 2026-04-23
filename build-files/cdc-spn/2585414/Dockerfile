@@ -53,10 +53,10 @@ RUN wget https://github.com/katholt/srst2/archive/v0.2.0.tar.gz \
   && rm v0.2.0.tar.gz \
   && pip install --break-system-packages /srst2-0.2.0
 
-# install freebayes v1.3.10
+# install freebayes v1.3.6, because v1.3.10 uses libwfa2, which ubuntu noble doesn't have yet
 RUN git clone --recursive https://github.com/freebayes/freebayes.git \
   && cd freebayes \
-  && git checkout v1.3.10 \
+  && git checkout v1.3.6 \
   && git submodule update --init --recursive \
   && meson setup build/ --buildtype release \
   && cd build \
