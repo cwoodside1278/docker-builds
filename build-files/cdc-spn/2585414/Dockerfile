@@ -12,7 +12,7 @@ LABEL license="https://github.com/BenJamesMetcalf/Spn_Scripts_Reference"
 LABEL maintainer="Kelsey Florek"
 LABEL maintainer="kelsey.florek@slh.wisc.edu"
 
-#install dependencies
+# install dependencies
 RUN apt-get update && apt-get install -y \
   perl \
   wget \
@@ -32,7 +32,9 @@ RUN apt-get update && apt-get install -y \
   libncurses5-dev \
   libcurl4-openssl-dev \
   autoconf \
-  cmake \
+  meson \
+  ninja-build \
+  pkg-config \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
@@ -51,15 +53,16 @@ RUN wget https://github.com/katholt/srst2/archive/v0.2.0.tar.gz \
   && rm v0.2.0.tar.gz \
   && pip install --break-system-packages /srst2-0.2.0
 
-# install freebayes v1.3.6
+# install freebayes v1.3.10
 RUN git clone --recursive https://github.com/freebayes/freebayes.git \
   && cd freebayes \
-  && git checkout v1.3.6 \
+  && git checkout v1.3.10 \
   && git submodule update --init --recursive \
-  && cmake -DCMAKE_BUILD_TYPE=Release -B build \
-  && cmake --build build --parallel $(nproc) \
-  && cmake --install build
-
+  && meson setup build/ --buildtype release \
+  && cd build \
+  && ninja \
+  && ninja install
+  
 # add the spn scripts pinned to commit 2585414
 RUN git clone https://github.com/BenJamesMetcalf/Spn_Scripts_Reference.git \
   && cd Spn_Scripts_Reference \
