@@ -13,8 +13,6 @@ LABEL license="https://github.com/BenJamesMetcalf/Spn_Scripts_Reference"
 LABEL maintainer="Kelsey Florek"
 LABEL maintainer.email="kelsey.florek@slh.wisc.edu"
 
-WORKDIR /data
-
 # install dependencies
 RUN apt-get update && apt-get install -y \
   perl \
@@ -71,6 +69,8 @@ RUN git clone --recursive https://github.com/freebayes/freebayes.git \
 RUN git clone https://github.com/BenJamesMetcalf/Spn_Scripts_Reference.git \
   && cd Spn_Scripts_Reference \
   && git checkout 2585414
+
+WORKDIR /data
 
 ENV PATH="/Spn_Scripts_Reference:/usr/local/bin:${PATH}"
 
