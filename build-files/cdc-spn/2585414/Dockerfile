@@ -45,15 +45,24 @@ RUN wget https://github.com/samtools/samtools/releases/download/1.19/samtools-1.
   && make \
   && make install
 
-#install srst2
-RUN wget https://github.com/katholt/srst2/archive/v0.2.0.tar.gz
-RUN tar -xzvf v0.2.0.tar.gz;rm v0.2.0.tar.gz;pip install /srst2-0.2.0
+# install srst2
+RUN wget https://github.com/katholt/srst2/archive/v0.2.0.tar.gz \
+  && tar -xzvf v0.2.0.tar.gz \
+  && rm v0.2.0.tar.gz \
+  && pip install --break-system-packages /srst2-0.2.0
 
-#install freebayes
-RUN git clone --recursive https://github.com/ekg/freebayes.git
-RUN cd freebayes/;git checkout v1.2.0;make; make install
+# install freebayes v1.3.6
+RUN git clone --recursive https://github.com/freebayes/freebayes.git \
+  && cd freebayes \
+  && git checkout v1.3.6 \
+  && git submodule update --init --recursive \
+  && cmake -DCMAKE_BUILD_TYPE=Release -B build \
+  && cmake --build build --parallel $(nproc) \
+  && cmake --install build
 
-#Add the spn scripts
-RUN git clone https://github.com/BenJamesMetcalf/Spn_Scripts_Reference.git
-ENV PATH="/Spn_Scripts_Reference:/samtools-0.1.18:${PATH}"\
- MODULESHOME="/usr/share/modules"
+# add the spn scripts pinned to commit 2585414
+RUN git clone https://github.com/BenJamesMetcalf/Spn_Scripts_Reference.git \
+  && cd Spn_Scripts_Reference \
+  && git checkout 2585414
+
+ENV PATH="/Spn_Scripts_Reference:/usr/local/bin:${PATH}"
