@@ -3,7 +3,7 @@ FROM ubuntu:noble
 
 # metadata
 LABEL base.image="ubuntu:noble"
-LABEL version="2585414" #Recent git commit
+LABEL version="2585414"
 LABEL software="cdc-spn"
 LABEL software.version="0.1"
 LABEL description="Scripts and reference files to type streptococcus pneumoniae"
