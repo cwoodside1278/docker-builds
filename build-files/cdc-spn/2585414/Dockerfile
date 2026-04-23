@@ -36,9 +36,14 @@ RUN apt-get update && apt-get install -y \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-#install samtools version 0.1.18
-RUN wget 'https://sourceforge.net/projects/samtools/files/samtools/0.1.18/samtools-0.1.18.tar.bz2'
-RUN tar -xvf samtools-0.1.18.tar.bz2; rm samtools-0.1.18.tar.bz2;cd samtools-0.1.18; make
+# install samtools 1.19
+RUN wget https://github.com/samtools/samtools/releases/download/1.19/samtools-1.19.tar.bz2 \
+  && tar -xjf samtools-1.19.tar.bz2 \
+  && rm samtools-1.19.tar.bz2 \
+  && cd samtools-1.19 \
+  && ./configure --prefix=/usr/local \
+  && make \
+  && make install
 
 #install srst2
 RUN wget https://github.com/katholt/srst2/archive/v0.2.0.tar.gz
