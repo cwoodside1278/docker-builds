@@ -3,7 +3,7 @@ FROM ubuntu:noble
 
 # metadata
 LABEL base.image="ubuntu:noble"
-LABEL version="1"
+LABEL version="2585414" #Recent git commit
 LABEL software="cdc-spn"
 LABEL software.version="0.1"
 LABEL description="Scripts and reference files to type streptococcus pneumoniae"
@@ -14,24 +14,27 @@ LABEL maintainer="kelsey.florek@slh.wisc.edu"
 
 #install dependencies
 RUN apt-get update && apt-get install -y \
-  perl\
-  wget\
-  git\
-  ncbi-blast+\
-  bedtools\
-  prodigal\
-  python\
-  python-cutadapt\
-  python-scipy\
-  bowtie2\
-  python-pip\
-  environment-modules\
-  velvet\
-  zlib1g-dev\
-  libbz2-dev\
-  liblzma-dev\
-  build-essential\
-  libncurses5-dev
+  perl \
+  wget \
+  git \
+  ncbi-blast+ \
+  bedtools \
+  prodigal \
+  python3 \
+  python3-pip \
+  python3-scipy \
+  cutadapt \
+  bowtie2 \
+  zlib1g-dev \
+  libbz2-dev \
+  liblzma-dev \
+  build-essential \
+  libncurses5-dev \
+  libcurl4-openssl-dev \
+  autoconf \
+  cmake \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
 #install samtools version 0.1.18
 RUN wget 'https://sourceforge.net/projects/samtools/files/samtools/0.1.18/samtools-0.1.18.tar.bz2'
