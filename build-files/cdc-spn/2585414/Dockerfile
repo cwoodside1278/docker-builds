@@ -48,17 +48,18 @@ RUN wget https://github.com/samtools/samtools/releases/download/1.19/samtools-1.
   && make \
   && make install
 
-# install miniforge for srst2 (avoids Anaconda TOS issues)
+# install miniforge
 RUN wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O /miniforge.sh \
   && bash /miniforge.sh -b -p /opt/conda \
   && rm /miniforge.sh \
   && /opt/conda/bin/conda clean -a
 
-ENV PATH="/opt/conda/bin:${PATH}"
+# install srst2 in a Python 2.7 conda environment
+RUN /opt/conda/bin/conda create -y -n srst2_env python=2.7 \
+  && /opt/conda/bin/conda install -y -n srst2_env -c bioconda srst2 \
+  && /opt/conda/bin/conda clean -a
 
-# install srst2 via bioconda
-RUN conda install -y -c bioconda -c conda-forge srst2 \
-  && conda clean -a
+ENV PATH="/opt/conda/envs/srst2_env/bin:/opt/conda/bin:${PATH}"
 
 # install freebayes v1.3.6
 RUN git clone --recursive https://github.com/freebayes/freebayes.git \
