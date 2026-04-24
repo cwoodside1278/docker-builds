@@ -48,11 +48,17 @@ RUN wget https://github.com/samtools/samtools/releases/download/1.19/samtools-1.
   && make \
   && make install
 
-# install srst2
-RUN wget https://github.com/katholt/srst2/archive/v0.2.0.tar.gz \
-  && tar -xzvf v0.2.0.tar.gz \
-  && rm v0.2.0.tar.gz \
-  && pip install --break-system-packages /srst2-0.2.0
+# install miniconda for srst2
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /miniconda.sh \
+  && bash /miniconda.sh -b -p /opt/conda \
+  && rm /miniconda.sh \
+  && /opt/conda/bin/conda clean -a
+
+ENV PATH="/opt/conda/bin:${PATH}"
+
+# install srst2 via bioconda
+RUN conda install -y -c bioconda -c conda-forge srst2 \
+  && conda clean -a
 
 # install freebayes v1.3.6
 RUN git clone --recursive https://github.com/freebayes/freebayes.git \
