@@ -48,10 +48,10 @@ RUN wget https://github.com/samtools/samtools/releases/download/1.19/samtools-1.
   && make \
   && make install
 
-# install miniconda for srst2
-RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /miniconda.sh \
-  && bash /miniconda.sh -b -p /opt/conda \
-  && rm /miniconda.sh \
+# install miniforge for srst2 (avoids Anaconda TOS issues)
+RUN wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O /miniforge.sh \
+  && bash /miniforge.sh -b -p /opt/conda \
+  && rm /miniforge.sh \
   && /opt/conda/bin/conda clean -a
 
 ENV PATH="/opt/conda/bin:${PATH}"
