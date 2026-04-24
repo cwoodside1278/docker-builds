@@ -78,8 +78,11 @@ RUN git clone https://github.com/BenJamesMetcalf/Spn_Scripts_Reference.git \
 
 WORKDIR /data
 
-ENV PATH="/Spn_Scripts_Reference:/usr/local/bin:${PATH}"
+#ENV PATH="/Spn_Scripts_Reference:/usr/local/bin:${PATH}"
+ENV PATH="/opt/conda/bin:/Spn_Scripts_Reference:/usr/local/bin:${PATH}" \
+  LC_ALL=C
 
+  
 # ---- test stage ----
 FROM app AS test
 
