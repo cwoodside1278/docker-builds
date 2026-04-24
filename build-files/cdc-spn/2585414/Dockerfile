@@ -56,9 +56,9 @@ RUN wget https://github.com/conda-forge/miniforge/releases/latest/download/Minif
 
 # install srst2 in a Python 2.7 conda environment with compatible samtools
 RUN /opt/conda/bin/conda create -y -n srst2_env python=2.7 \
-  && /opt/conda/bin/conda install -y -n srst2_env -c bioconda srst2 samtools=0.1.19 \
+  && /opt/conda/bin/conda install -y -n srst2_env -c bioconda -c conda-forge srst2 \
   && /opt/conda/bin/conda clean -a
-
+  
 ENV PATH="/opt/conda/envs/srst2_env/bin:/opt/conda/bin:${PATH}"
 
 # install freebayes v1.3.6
