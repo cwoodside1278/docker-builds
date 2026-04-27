@@ -80,9 +80,6 @@ RUN git clone https://github.com/BenJamesMetcalf/Spn_Scripts_Reference.git \
 
 WORKDIR /data
 
-#ENV PATH="/Spn_Scripts_Reference:/usr/local/bin:${PATH}"
-#ENV PATH="/opt/conda/bin:/Spn_Scripts_Reference:/usr/local/bin:${PATH}" \
-  LC_ALL=C
 ENV PATH="/opt/conda/envs/srst2_env/bin:/opt/conda/bin:/Spn_Scripts_Reference:/usr/local/bin:${PATH}" \
   LC_ALL=C
   
