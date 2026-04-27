@@ -39,14 +39,15 @@ RUN apt-get update && apt-get install -y \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-# install samtools 1.19
+# install samtools 1.19 but rename it so srst2 uses conda's samtools 0.1.18
 RUN wget https://github.com/samtools/samtools/releases/download/1.19/samtools-1.19.tar.bz2 \
   && tar -xjf samtools-1.19.tar.bz2 \
   && rm samtools-1.19.tar.bz2 \
   && cd samtools-1.19 \
   && ./configure --prefix=/usr/local \
   && make \
-  && make install
+  && make install \
+  && mv /usr/local/bin/samtools /usr/local/bin/samtools-1.19
 
 # install miniforge
 RUN wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O /miniforge.sh \
@@ -80,9 +81,11 @@ RUN git clone https://github.com/BenJamesMetcalf/Spn_Scripts_Reference.git \
 WORKDIR /data
 
 #ENV PATH="/Spn_Scripts_Reference:/usr/local/bin:${PATH}"
-ENV PATH="/opt/conda/bin:/Spn_Scripts_Reference:/usr/local/bin:${PATH}" \
+#ENV PATH="/opt/conda/bin:/Spn_Scripts_Reference:/usr/local/bin:${PATH}" \
   LC_ALL=C
-
+ENV PATH="/opt/conda/envs/srst2_env/bin:/opt/conda/bin:/Spn_Scripts_Reference:/usr/local/bin:${PATH}" \
+  LC_ALL=C
+  
   
 # ---- test stage ----
 FROM app AS test
