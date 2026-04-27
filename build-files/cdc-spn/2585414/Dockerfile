@@ -93,15 +93,15 @@ WORKDIR /test_data
 RUN apt-get update && apt-get install -y sra-toolkit \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# run test - ERR559060 is Streptococcus pneumoniae
-RUN fasterq-dump ERR559060 --split-files -O /test_data \
+# run test - ERR1795461 is Streptococcus pneumoniae, expected serotype 6B
+RUN fasterq-dump ERR1795461 --split-files -O /test_data \
   && perl /Spn_Scripts_Reference/SPN_Serotyper.pl \
-     -1 /test_data/ERR559060_1.fastq \
-     -2 /test_data/ERR559060_2.fastq \
+     -1 /test_data/ERR1795461_1.fastq \
+     -2 /test_data/ERR1795461_2.fastq \
      -r /Spn_Scripts_Reference/SPN_Reference_DB/SPN_Sero_Gene-DB_Final.fasta \
      -o /test_output \
-     -n ERR559060 \
+     -n ERR1795461 \
   && cat /test_output/OUT_SeroType_Results.txt \
-  && grep -q "." /test_output/OUT_SeroType_Results.txt \
-  && echo "SPN_Serotyper.pl test passed" \
+  && grep -q "6B" /test_output/OUT_SeroType_Results.txt \
+  && echo "PASS: Serotype 6B correctly called" \
   && rm -rf /test_data /test_output
