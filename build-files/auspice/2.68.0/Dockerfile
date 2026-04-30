@@ -48,3 +48,4 @@ RUN mkdir /data/test && \
 RUN auspice --help
 # Convert v1 -> v2 JSON using real data to exercise auspice's code paths
 RUN auspice convert --v1 /data/test/zika_meta.json /data/test/zika_tree.json --output /data/test/zika_v2.json
+
