@@ -40,9 +40,11 @@ WORKDIR /data
 
 #------ Test ------
 FROM app AS test
-# Download a real test dataset
+# Download v1 format zika dataset (separate meta + tree JSONs) for conversion test
 RUN mkdir /data/test && \
-    curl http://data.nextstrain.org/zika.json --compressed -o /data/test/zika.json
-# Verify auspice is installed and can process real data
+    curl http://data.nextstrain.org/zika_tree.json --compressed -o /data/test/zika_tree.json && \
+    curl http://data.nextstrain.org/zika_meta.json --compressed -o /data/test/zika_meta.json
+# Verify auspice is installed
 RUN auspice --help
-RUN auspice convert --jsonV1 /data/test/zika.json --output-main /data/test/zika_v2.json
+# Convert v1 -> v2 JSON using real data to exercise auspice's code paths
+RUN auspice convert --v1 /data/test/zika_meta.json /data/test/zika_tree.json --output /data/test/zika_v2.json
