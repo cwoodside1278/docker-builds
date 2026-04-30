@@ -11,6 +11,7 @@ The licenses of the open-source software that is contained in these Docker image
 | ANIclustermap | MIT | https://github.com/moshi4/ANIclustermap/blob/main/LICENSE |
 | artic | MIT | https://github.com/artic-network/fieldbioinformatics/blob/master/LICENSE |
 | artic-ncov2019-epi2me | MPL 2.0 | https://github.com/epi2me-labs/wf-artic/blob/master/LICENSE |
+| artic-tools | MIT | https://github.com/will-rowe/artic-tools/blob/master/LICENSE |
 | any2fasta | GNU GPLv3 | https://github.com/tseemann/any2fasta/blob/master/LICENSE |
 | ArborView | Apache 2.0 | https://github.com/phac-nml/ArborView/tree/main?tab=readme-ov-file#legal-and-compliance-information |
 | ARIBA | GNU GPLv3 | https://github.com/sanger-pathogens/ariba/blob/master/LICENSE |
@@ -20,6 +21,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Autocycler | GNU General Public License v3.0 | https://github.com/rrwick/Autocycler/blob/main/LICENSE |
 | Bakta | GNU GPLv3 | https://github.com/oschwengers/bakta/blob/main/LICENSE |
 | Bandage | GNU GPLv3 | https://github.com/rrwick/Bandage?tab=GPL-3.0-1-ov-file#readme |
+| BandageNG | GNU GPLv3 | https://github.com/asl/BandageNG/blob/dev/COPYING |
 | BBTools | non-standard - see `licence.txt` and `legal.txt` that is included in docker image under `/bbmap/docs/`; Also on sourceforge repo for BBTools | https://github.com/bbushnell/BBTools/blob/master/license.txt |
 | bcftools | MIT & **GNU GPLv3** | https://github.com/samtools/bcftools/blob/develop/LICENSE |
 | bedtools | MIT | https://github.com/arq5x/bedtools2/blob/master/LICENSE |
@@ -202,6 +204,7 @@ The licenses of the open-source software that is contained in these Docker image
 | shigatyper | non-standard license see --> | https://github.com/CFSAN-Biostatistics/shigatyper/blob/master/LICENSE |
 | ShigEiFinder | GNU GPLv3 | https://github.com/LanLab/ShigEiFinder/blob/main/LICENSE |
 | Shovill | GNU GPLv3 | https://github.com/tseemann/shovill/blob/master/LICENSE |
+| simplot-cl | GNU GPLv3 | https://github.com/hodcroftlab/simplot-cl/blob/main/LICENSE.txt |
 | SISTR | Apache 2.0 | https://github.com/phac-nml/sistr_cmd/blob/master/LICENSE |
 | SKA | MIT | https://github.com/simonrharris/SKA/blob/master/LICENSE |
 | SKA2 | Apache 2.0 | https://github.com/bacpop/ska.rust/blob/master/LICENSE |
@@ -231,7 +234,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Trycycler | GNU GPLv3 | https://github.com/rrwick/Trycycler/blob/master/LICENSE |
 | Unicycler | GNU GPLv3 | https://github.com/rrwick/Unicycler/blob/master/LICENSE |
 | UShER | MIT | https://github.com/yatisht/usher/blob/master/LICENSE |
-| VADR | Public Domain | https://github.com/nawrockie/vadr/blob/master/LICENSE |
+| VADR | Public Domain | https://github.com/NLM-DIR/vadr/blob/master/LICENSE |
 | Verkko | Public Domain | https://github.com/marbl/verkko/blob/master/README.licenses |
 | VIBRANT | GNU GPLv3 | https://github.com/AnantharamanLab/VIBRANT/blob/master/LICENSE |
 | VIGOR4 | GNU GPLv3 | https://github.com/JCVenterInstitute/VIGOR4/blob/master/LICENSE.txt |
