@@ -38,5 +38,11 @@ EXPOSE 4000
 
 WORKDIR /data
 
+#------ Test ------
 FROM app AS test
+# Download a real test dataset
+RUN mkdir /data/test && \
+    curl http://data.nextstrain.org/zika.json --compressed -o /data/test/zika.json
+# Verify auspice is installed and can process real data
 RUN auspice --help
+RUN auspice convert --jsonV1 /data/test/zika.json --output-main /data/test/zika_v2.json
