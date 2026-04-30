@@ -1,4 +1,4 @@
-FROM node:20.19.0
+FROM node:20.19.0 AS app
 ARG AUSPICE_VERSION=2.68.0
 
 LABEL base.image="node:20.19.0-slim"
@@ -37,3 +37,6 @@ ENV HOST=0.0.0.0
 EXPOSE 4000
 
 WORKDIR /data
+
+FROM app AS test
+RUN auspice --help
